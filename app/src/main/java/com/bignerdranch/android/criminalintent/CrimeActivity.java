@@ -51,6 +51,7 @@ public class CrimeActivity extends AppCompatActivity {
 
         for (int i = 0; i < mCrimes.size(); i++) {
             if (mCrimes.get(i).getId().equals(crimeId)) {
+                mViewPager.setCurrentItem(i);
                 break;
             }
         }

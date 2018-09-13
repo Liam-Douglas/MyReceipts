@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeBaseHelper;
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeCursorWrapper;
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeDbSchema;
+import com.bignerdranch.android.criminalintent.database.CrimeBaseHelper;
+import com.bignerdranch.android.criminalintent.database.CrimeCursorWrapper;
+import com.bignerdranch.android.criminalintent.database.CrimeDbSchema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +103,7 @@ public class CrimeLab {
         values.put(CrimeDbSchema.CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeDbSchema.CrimeTable.Cols.DATE, crime.getDate().getTime());
         values.put(CrimeDbSchema.CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(CrimeDbSchema.CrimeTable.Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }
