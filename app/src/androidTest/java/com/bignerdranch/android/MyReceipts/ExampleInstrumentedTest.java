@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.MyReceipts;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

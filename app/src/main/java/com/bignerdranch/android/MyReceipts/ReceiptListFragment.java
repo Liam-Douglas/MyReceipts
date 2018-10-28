@@ -1,6 +1,7 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.MyReceipts;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.List;
 
-public class CrimeListFragment extends Fragment {
+public class ReceiptListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
@@ -32,7 +34,7 @@ public class CrimeListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_receipt_list, container, false);
 
         mCrimeRecyclerView = (RecyclerView) view
                 .findViewById(R.id.crime_recycler_view);
@@ -62,101 +64,84 @@ public class CrimeListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime_list, menu);
-
-        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if (mSubtitleVisible) {
-            subtitleItem.setTitle(R.string.hide_subtitle);
-        } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
-        }
+        inflater.inflate(R.menu.fragment_receipt_list, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_crime:
-                Crime crime = new Crime();
-                CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = CrimeActivity
-                        .newIntent(getActivity(), crime.getId());
+                Receipt receipt = new Receipt();
+                ReceiptLab.get(getActivity()).addReceipt(receipt);
+                Intent intent = ReceiptActivity
+                        .newIntent(getActivity(), receipt.getId());
                 startActivity(intent);
                 return true;
-            case R.id.show_subtitle:
-                mSubtitleVisible = !mSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
-                updateSubtitle();
-                return true;
+            case R.id.help_button:
+                Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://en.wikipedia.org/wiki/Receipt"));
+                startActivity(helpIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void updateSubtitle() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        int crimeCount = crimeLab.getmCrimes().size();
-        String subtitle = getString(R.string.subtitle_format, crimeCount);
-
-        if (!mSubtitleVisible) {
-            subtitle = null;
-        }
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
-    }
-
     private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getmCrimes();
+        ReceiptLab receiptLab = ReceiptLab.get(getActivity());
+        List<Receipt> receipts = receiptLab.getReceipts();
 
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
+            mAdapter = new CrimeAdapter(receipts);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setCrimes(crimes);
+            mAdapter.setCrimes(receipts);
             mAdapter.notifyDataSetChanged();
         }
 
-        updateSubtitle();
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
+        private TextView mShopnameTextView;
+        private TextView mCommentTextView;
         private TextView mDateTextView;
         private ImageView mSolvedImageView;
 
-        private Crime mCrime;
+        private Receipt mReceipt;
 
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            super(inflater.inflate(R.layout.list_item_receipt, parent, false));
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.receipt_title);
+            mShopnameTextView = (TextView) itemView.findViewById(R.id.receipt_shop_name);
+            mCommentTextView = (TextView) itemView.findViewById(R.id.receipt_comment);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
-            mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
+            mSolvedImageView = (ImageView) itemView.findViewById(R.id.receipt_solved);
         }
 
-        public void bind(Crime crime) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
-            mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
+        public void bind(Receipt receipt) {
+            mReceipt = receipt;
+            mTitleTextView.setText(mReceipt.getTitle());
+            mShopnameTextView.setText(mReceipt.getShopname());
+            //mCommentTextView.setText(mReceipt.getComment());
+            mDateTextView.setText(mReceipt.getDate().toString());
+            mSolvedImageView.setVisibility(receipt.isSolved() ? View.VISIBLE : View.GONE);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = ReceiptActivity.newIntent(getActivity(), mReceipt.getId());
             startActivity(intent);
         }
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
 
-        private List<Crime> mCrimes;
+        private List<Receipt> mReceipts;
 
-        public CrimeAdapter(List<Crime> crimes) {
-            mCrimes = crimes;
+        public CrimeAdapter(List<Receipt> receipts) {
+            mReceipts = receipts;
         }
 
         @Override
@@ -168,17 +153,17 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-            Crime crime = mCrimes.get(position);
-            holder.bind(crime);
+            Receipt receipt = mReceipts.get(position);
+            holder.bind(receipt);
         }
 
         @Override
         public int getItemCount() {
-            return mCrimes.size();
+            return mReceipts.size();
         }
 
-        public void setCrimes(List<Crime> crimes) {
-            mCrimes = crimes;
+        public void setCrimes(List<Receipt> receipts) {
+            mReceipts = receipts;
         }
     }
 }

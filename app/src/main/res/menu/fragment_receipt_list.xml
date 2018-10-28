@@ -4,11 +4,12 @@
     <item
         android:id="@+id/new_crime"
         android:icon="@drawable/ic_menu_add"
-        android:title="@string/new_crime"
+        android:title="@string/new_receipt"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/show_subtitle"
-        android:title="@string/show_subtitle"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/help_button"
+        android:title="@string/help_button"
+        app:showAsAction="ifRoom"/>
+
 </menu>

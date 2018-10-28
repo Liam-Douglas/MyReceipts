@@ -1,23 +1,22 @@
 <resources>
-    <string name="app_name">CriminalIntent</string>
-    <string name="crime_title_hint">Enter a title for the crime.</string>
-    <string name="crime_title_label">Title</string>
-    <string name="crime_details_label">Details</string>
+    <string name="app_name">My Receipts</string>
+    <string name="receipt_title_hint">Enter a title for the receipt.</string>
+    <string name="receipt_title_label">Title</string>
+    <string name="receipt_shop_name_label">Shop Name</string>
+    <string name="receipt_shop_name_hint">Enter the shop name.</string>
+    <string name="receipt_comment_hint">Enter a comment for this receipt.</string>
+    <string name="receipt_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
-    <string name="date_picker_title">Date of crime:</string>
-    <string name="new_crime">Name Crime</string>
-    <string name="show_subtitle">Show Subtitle</string>
-    <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="subtitle_format">%1$d crimes</string>
-    <string name="crime_suspect_text">Choose Suspect</string>
-    <string name="crime_report_text">Send Crime Report</string>
-    <string name="crime_report">%1$s!
-        The crime was discovered on %2$s. %3$s, and %4$s
+    <string name="date_picker_title">Date of receipt:</string>
+    <string name="new_receipt">Name Crime</string>
+    <string name="help_button">Help</string>
+    <string name="receipt_report_text">Send Receipt Report</string>
+    <string name="delete_receipt">Delete</string>
+    <string name="receipt_report">%1$s!
+        The receipt was discovered on %2$s. %3$s, and %4$s
     </string>
-    <string name="crime_report_solved">The case is solved</string>
-    <string name="crime_report_unsolved">The case is unsolved</string>
-    <string name="crime_report_no_suspect">there is no suspect.</string>
-    <string name="crime_report_suspect">the suspect is %s.</string>
-    <string name="crime_report_subject">CriminalIntent Crime Report</string>
-    <string name="send_report">Send crime report via</string>
+    <string name="receipt_report_solved">The case is solved</string>
+    <string name="receipt_report_unsolved">The case is unsolved</string>
+    <string name="receipt_report_subject">MyReceipts Receipt Report</string>
+    <string name="send_report">Send receipt report via</string>
 </resources>

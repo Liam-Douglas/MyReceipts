@@ -1,7 +1,7 @@
-package com.bignerdranch.android.criminalintent.database;
+package com.bignerdranch.android.MyReceipts.database;
 
-public class CrimeDbSchema {
-    public static final class CrimeTable {
+public class ReceiptDbSchema {
+    public static final class ReceiptTable {
         public static final String NAME = "crimes";
 
         public static final class Cols {
@@ -9,7 +9,6 @@ public class CrimeDbSchema {
             public static final String TITLE = "title";
             public static final String DATE = "date";
             public static final String SOLVED = "solved";
-            public static final String SUSPECT = "suspect";
         }
     }
 }

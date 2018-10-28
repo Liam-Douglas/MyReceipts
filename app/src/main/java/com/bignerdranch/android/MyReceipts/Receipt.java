@@ -1,21 +1,22 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.MyReceipts;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Crime {
+public class Receipt {
 
     private UUID mId;
     private String mTitle;
+    private String mShopname;
+    private String mComment;
     private Date mDate;
     private boolean mSolved;
-    private String mSuspect;
 
-    public Crime() {
+    public Receipt() {
         this(UUID.randomUUID());
     }
 
-    public Crime(UUID id) {
+    public Receipt(UUID id) {
         mId = id;
         mDate = new Date();
     }
@@ -30,6 +31,22 @@ public class Crime {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public String getShopname() {
+        return mShopname;
+    }
+
+    public void setShopname(String shopname) {
+        mShopname = shopname;
+    }
+
+    public String getComment() {
+        return mComment;
+    }
+
+    public void setComment(String comment) {
+        mComment = comment;
     }
 
     public Date getDate() {
@@ -48,11 +65,8 @@ public class Crime {
         mSolved = solved;
     }
 
-    public String getSuspect() {
-        return mSuspect;
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpb";
     }
 
-    public void setSuspect(String suspect) {
-        mSuspect = suspect;
-    }
 }

@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.MyReceipts;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
